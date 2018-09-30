@@ -27,7 +27,10 @@ require_relative("../db/sql_runner.rb")
    end
 
    def update()
-
+     sql = "UPDATE customers SET name = $1, funds $2
+     WHERE id = $3;"
+     values = [@name, @funds, @id]
+     sqlRunner.run(sql, values)
    end
 
    def self.delete_all()
