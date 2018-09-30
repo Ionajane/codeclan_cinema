@@ -38,4 +38,14 @@ require_relative("../db/sql_runner.rb")
      SqlRunner.run(sql)
    end
 
+   def films()
+     sql = "SELECT * FROM films
+     INNER JOIN tickets
+     ON tickets.film_id = film.id
+     WHERE tickets.customer_id = $1;"
+     values = [@id]
+     film_info = SqllRunner.run(sql,values)
+     return Film.map_items(film_info)
+   end
+
  end
