@@ -12,11 +12,18 @@ class Film
   end
 
   def save()
-
+    sql = "INSERT INTO films(title, price)
+    VALUES ($1, $2) RETURNING id;"
+    values = [@title, @price]
+    results = SqlRunner.run(sql, values)
+    @id = results[0]['id'].to_i
   end
 
   def self.all
-
+    sql = "SELECT * FROM films;"
+    films = SqlRunner.run(sql)
+    result = films.map {|film| Film.new(film)}
+    return result
   end
 
   def update()
@@ -24,7 +31,8 @@ class Film
   end
 
   def self.delete_all()
-
+    sql = "DELETE FROM films;"
+    SqlRunner.run(sql)
   end
-  
+
 end

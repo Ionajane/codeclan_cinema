@@ -10,7 +10,7 @@ class Ticket
   end
 
   def save()
-
+    #sql = 'INSERT INTO tickets ()'
   end
 
   def self.all
